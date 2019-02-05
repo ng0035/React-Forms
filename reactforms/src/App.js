@@ -1,13 +1,157 @@
-import React, { Component } from 'react';
+import React, {Component} from "react"
+// this is a react form keeping all the inputs in the state
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-       kjk
-      </div>
-    );
-  }
+    constructor() {
+        super()
+        this.state = {
+            firstName: "",
+            lastName: "",
+            age: "",
+            gender: "",
+            destination: "",
+            isVegan: false,
+            isKosher: false,
+            isLactoseFree: false
+        }
+        this.handleChange = this.handleChange.bind(this)
+    }
+    
+    handleChange(event) {
+        const {name, value, type, checked} = event.target
+        type === "checkbox" ? 
+            this.setState({
+                [name]: checked
+            })
+        :
+        this.setState({
+            [name]: value
+        }) 
+    }
+    
+    render() {
+        return (
+            <main className = "container">
+                <form className = "jumbotron form1">
+                    <input
+                        className="inp" 
+                        name="firstName" 
+                        value={this.state.firstName} 
+                        onChange={this.handleChange} 
+                        placeholder="First Name" 
+                    />
+                    <br />
+                    
+                    <input 
+                        className="inp"
+                        name="lastName" 
+                        value={this.state.lastName}
+                        onChange={this.handleChange} 
+                        placeholder="Last Name" 
+                    />
+                    <br />
+                    
+                    <input 
+                        name="age" 
+                        className="inp"
+                        value={this.state.age}
+                        onChange={this.handleChange} 
+                        placeholder="Age" 
+                    />
+                    <br />
+                    
+                    <label>
+                        <input 
+                            className="inp"
+                            type="radio" 
+                            name="gender"
+                            value="male"
+                            checked={this.state.gender === "male"}
+                            onChange={this.handleChange}
+                        /> Male
+                    </label>
+                    
+                    <br />
+                    
+                    <label>
+                        <input 
+                            className="inp"
+                            type="radio" 
+                            name="gender"
+                            value="female"
+                            checked={this.state.gender === "female"}
+                            onChange={this.handleChange}
+                        /> Female
+                    </label>
+                    
+                    <br />
+                    
+                    <select 
+                        className="inp"
+                        value={this.state.destination} 
+                        name="destination" 
+                        onChange={this.handleChange}
+                    >
+                        <option value="">-- Please Choose a destination --</option>
+                        <option value="germany">Germany</option>
+                        <option value="norway">Norway</option>
+                        <option value="north pole">North Pole</option>
+                        <option value="south pole">South Pole</option>
+                    </select>
+                    
+                    <br />
+                    
+                    <label>
+                        <input 
+                            className="inp"
+                            type="checkbox"
+                            name="isVegan"
+                            onChange={this.handleChange}
+                            checked={this.state.isVegan}
+                        /> Vegan?
+                    </label>
+                    <br />
+                    
+                    <label>
+                        <input 
+                            className="inp"
+                            type="checkbox"
+                            name="isKosher"
+                            onChange={this.handleChange}
+                            checked={this.state.isKosher}
+                        /> Kosher?
+                    </label>
+                    <br />
+                    
+                    <label>
+                        <input 
+                            className="inp"
+                            type="checkbox"
+                            name="isLactoseFree"
+                            onChange={this.handleChange}
+                            checked={this.state.isLactoseFree}
+                        /> Lactose Free?
+                    </label>
+                    <br />
+                    
+                    <button>Submit</button>
+                </form>
+                <hr />
+                <div className="jumbotron ent"> 
+                  <h4>Entered information:</h4>
+                  <p>Your name: {this.state.firstName} {this.state.lastName}</p>
+                  <p>Your age: {this.state.age}</p>
+                  <p>Your gender: {this.state.gender}</p>
+                  <p>Your destination: {this.state.destination}</p>
+                  <p>Your dietary restrictions:</p>
+                  
+                  <p>Vegan: {this.state.isVegan ? "Yes" : "No"}</p>
+                  <p>Kosher: {this.state.isKosher ? "Yes" : "No"}</p>
+                  <p>Lactose Free: {this.state.isLactoseFree ? "Yes" : "No"}</p>
+                </div> 
+            </main>
+        )
+    }
 }
 
-export default App;
+export default App
